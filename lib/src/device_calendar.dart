@@ -237,7 +237,9 @@ class DeviceCalendarPlugin {
 //                 : TZDateTime.from(dateEnd,
 //                 timeZoneDatabase.locations[event.end!.location.name]!);
             
-            event.end = TZDateTime.from(dateEnd, timeZoneDatabase.locations[event.end!.location.name]!).add(Duration(days: 1));
+            event.end = Platform.isAndroid
+              ? TZDateTime.from(dateEnd, timeZoneDatabase.locations[event.end!.location.name]!).add(Duration(days: 1))
+              : TZDateTime.from(dateEnd, timeZoneDatabase.locations[event.end!.location.name]!);
             
           }
         }
