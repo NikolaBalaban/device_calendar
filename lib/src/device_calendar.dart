@@ -209,30 +209,30 @@ class DeviceCalendarPlugin {
       ChannelConstants.methodNameCreateOrUpdateEvent,
       assertParameters: (result) {
         // Setting time to 0 for all day events
-        if (event.allDay == true) {
-          if (event.start != null) {
-            var dateStart = DateTime(event.start!.year, event.start!.month,
-                event.start!.day, 0, 0, 0);
-            // allDay events on Android need to be at midnight UTC
-            event.start = Platform.isAndroid
-                ? TZDateTime.utc(event.start!.year, event.start!.month,
-                event.start!.day, 0, 0, 0)
-                : TZDateTime.from(dateStart,
-                timeZoneDatabase.locations[event.start!.location.name]!);
-          }
-          if (event.end != null) {
-            var dateEnd = DateTime(
-                event.end!.year, event.end!.month, event.end!.day, 0, 0, 0);
-            // allDay events on Android need to be at midnight UTC on the
-            // day after the last day. For example, a 2-day allDay event on
-            // Jan 1 and 2, should be from Jan 1 00:00:00 to Jan 3 00:00:00
-            event.end = Platform.isAndroid
-                ? TZDateTime.utc(event.end!.year, event.end!.month,
-                event.end!.day, 0, 0, 0)
-                .add(Duration(days: 1))
-                : TZDateTime.from(dateEnd,
-                timeZoneDatabase.locations[event.end!.location.name]!);
-          }
+//         if (event.allDay == true) {
+//           if (event.start != null) {
+//             var dateStart = DateTime(event.start!.year, event.start!.month,
+//                 event.start!.day, 0, 0, 0);
+//             // allDay events on Android need to be at midnight UTC
+//             event.start = Platform.isAndroid
+//                 ? TZDateTime.utc(event.start!.year, event.start!.month,
+//                 event.start!.day, 0, 0, 0)
+//                 : TZDateTime.from(dateStart,
+//                 timeZoneDatabase.locations[event.start!.location.name]!);
+//           }
+//           if (event.end != null) {
+//             var dateEnd = DateTime(
+//                 event.end!.year, event.end!.month, event.end!.day, 0, 0, 0);
+//             // allDay events on Android need to be at midnight UTC on the
+//             // day after the last day. For example, a 2-day allDay event on
+//             // Jan 1 and 2, should be from Jan 1 00:00:00 to Jan 3 00:00:00
+//             event.end = Platform.isAndroid
+//                 ? TZDateTime.utc(event.end!.year, event.end!.month,
+//                 event.end!.day, 0, 0, 0)
+//                 .add(Duration(days: 1))
+//                 : TZDateTime.from(dateEnd,
+//                 timeZoneDatabase.locations[event.end!.location.name]!);
+//           }
         }
 
         _assertParameter(
