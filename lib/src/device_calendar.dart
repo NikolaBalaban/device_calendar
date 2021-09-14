@@ -233,7 +233,7 @@ class DeviceCalendarPlugin {
 //                 : TZDateTime.from(dateEnd,
 //                 timeZoneDatabase.locations[event.end!.location.name]!);
 //           }
-        }
+//         }
 
         _assertParameter(
           result,
