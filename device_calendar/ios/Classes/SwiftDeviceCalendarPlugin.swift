@@ -149,10 +149,11 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
             let arguments = call.arguments as! Dictionary<String, AnyObject>
             //let calendar = EKCalendar.init(for: EKEntityType.event, eventStore: eventStore)
             let calendar = EKCalendar(for: .event, eventStore: eventStore)
-            let `default` = eventStore.defaultCalendarForNewEvents?.source
+            let defaultSource = eventStore.defaultCalendarForNewEvents?.source
             let iCloud = eventStore.sources.first(where: { $0.sourceType == .calDAV })
             let local = eventStore.sources.first(where: { $0.sourceType == .local })
-            let source = iCloud ?? `default` ?? local
+            let source = iCloud ?? defaultSource ?? local
+            print("CALENDAR SOURCE \(source)")
             do {
                 calendar.title = arguments[calendarNameArgument] as! String
                 let calendarColor = arguments[calendarColorArgument] as? String
@@ -167,6 +168,7 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
                 //let localSources = eventStore.sources.filter { $0.sourceType == .local }
                 if (source != nil) {
                     calendar.source = source
+                    print("SAVING CALENDAR")
                     try! eventStore.saveCalendar(calendar, commit: true)
                     result(calendar.calendarIdentifier)
                 } else {
@@ -183,6 +185,7 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
     //             }
             }
             catch {
+                print("ERROR")
                 eventStore.reset()
                 result(FlutterError(code: self.genericError, message: error.localizedDescription, details: nil))
             }
