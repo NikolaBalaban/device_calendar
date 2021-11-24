@@ -164,7 +164,7 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
         //let calendar = EKCalendar.init(for: EKEntityType.event, eventStore: eventStore)
         let calendar = EKCalendar(for: .event, eventStore: eventStore)
         //let `default` = eventStore.defaultCalendarForNewEvents?.source
-        let iCloud = eventStore.sources.first(where: { $0.sourceType == .calDAV && [[$0.title lowercaseString] isEqualToString:@"icloud"]})
+        let iCloud = eventStore.sources.first(where: { $0.sourceType == .calDAV && $0.title.lowercased() == "icloud"})
         let local = eventStore.sources.first(where: { $0.sourceType == .local })
         let source = iCloud ?? local
         do {
