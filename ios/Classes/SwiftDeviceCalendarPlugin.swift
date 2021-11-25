@@ -167,7 +167,7 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
         let iCloud = eventStore.sources.first(where: { $0.sourceType == .calDAV && $0.title.lowercased() == "icloud"})
         let local = eventStore.sources.first(where: { $0.sourceType == .local })
         var source = local
-        if (source!.title.lowercased() != `default`!.title.lowecased() && iCloud != nil) {
+        if (source!.title.lowercased() != `default`!.title.lowercased() && iCloud != nil) {
             source = iCloud
         }
         do {
