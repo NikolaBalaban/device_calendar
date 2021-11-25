@@ -163,10 +163,13 @@ public class SwiftDeviceCalendarPlugin: NSObject, FlutterPlugin {
         let arguments = call.arguments as! Dictionary<String, AnyObject>
         //let calendar = EKCalendar.init(for: EKEntityType.event, eventStore: eventStore)
         let calendar = EKCalendar(for: .event, eventStore: eventStore)
-        //let `default` = eventStore.defaultCalendarForNewEvents?.source
+        let `default` = eventStore.defaultCalendarForNewEvents?.source
         let iCloud = eventStore.sources.first(where: { $0.sourceType == .calDAV && $0.title.lowercased() == "icloud"})
         let local = eventStore.sources.first(where: { $0.sourceType == .local })
-        let source = iCloud ?? local
+        var source = local
+        if (source.title.lowercased() != `default`.title.lowecased() && iCloud != nil) {
+            source = iCloud
+        }
         do {
             calendar.title = arguments[calendarNameArgument] as! String
             let calendarColor = arguments[calendarColorArgument] as? String
