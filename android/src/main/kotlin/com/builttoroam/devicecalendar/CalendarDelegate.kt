@@ -848,7 +848,7 @@ class CalendarDelegate : PluginRegistry.RequestPermissionsResultListener {
     @Synchronized
     private fun generateUniqueRequestCodeAndCacheParameters(parameters: CalendarMethodsParametersCacheModel): Int {
         // TODO we can ran out of Int's at some point so this probably should re-use some of the freed ones
-        val uniqueRequestCode: Int = (_cachedParametersMap.keys.max() ?: 0) + 1
+        val uniqueRequestCode: Int = (_cachedParametersMap.keys.maxOrNull() ?: 0) + 1
         parameters.ownCacheKey = uniqueRequestCode
         _cachedParametersMap[uniqueRequestCode] = parameters
 
