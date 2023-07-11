@@ -742,10 +742,11 @@ class CalendarDelegate : PluginRegistry.RequestPermissionsResultListener {
         when (rfcRecurrenceRule.freq) {
             Freq.WEEKLY, Freq.MONTHLY, Freq.YEARLY -> {
                 recurrenceRule.daysOfWeek = rfcRecurrenceRule.byDayPart?.mapNotNull {
-                    DayOfWeek.values().find { dayOfWeek -> dayOfWeek.ordinal == it.weekday.ordinal }
-                }?.toMutableList()
-            }
-        }
+                     DayOfWeek.values().find { dayOfWeek -> dayOfWeek.ordinal == it.weekday.ordinal }
+                 }?.toMutableList()
+             }
+             else -> recurrenceRule.daysOfWeek = null
+         }
 
         val rfcRecurrenceRuleString = rfcRecurrenceRule.toString()
         if (rfcRecurrenceRule.freq == Freq.MONTHLY || rfcRecurrenceRule.freq == Freq.YEARLY) {
